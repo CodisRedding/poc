@@ -32,12 +32,17 @@ module.exports = {
       { 
         test: /\.js$/, 
         exclude: /node_modules/, 
-        loader: 'babel-loader'
+        use: 'babel-loader'
       },
       { 
         test: /\.scss$/, 
         use: cssConfig
-      }]
+      },
+      { 
+        test: /\.png$/, 
+        use: 'file-loader'
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -49,7 +54,7 @@ module.exports = {
       template: './src/index.html'
     }),
     new ExtractTextPlugin({
-      filename: 'app.css',
+      filename: '[name].css',
       disable: !isProd,
       allChunks: true
     }),

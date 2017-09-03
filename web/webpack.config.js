@@ -1,19 +1,19 @@
+const path = require('path');
+
 module.exports = {
-  entry: './app/index.js',
+  entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/public/js'
+    path: path.resolve(__dirname, 'public', 'js')
   },
 
-  devtool: 'source-map',
-
   resolve: {
-    extensions: ['.js']
+    extensions: ['web.js', '.js', '.json', '.web.jsx', '.jsx']
   },
 
   module: {
-    preLoaders: [
-      { test: /\.js$/, loader: 'source-map-loader' }
+    rules: [
+      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
     ]
   }
 };

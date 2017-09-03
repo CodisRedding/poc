@@ -3,3 +3,16 @@ version: "3"
 services:
   web:
     build: ./web
+    command: webpack --watch
+    volumes:
+      - ./web:/app
+    ports:
+      - "5001:80"
+      - "5858:5858"
+    networks: 
+      - front-tier
+      - back-tier
+
+networks: 
+  front-tier:
+  back-tier:

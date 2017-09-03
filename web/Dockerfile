@@ -2,7 +2,7 @@ FROM node:4.8.0-slim
 
 WORKDIR /app
 
-RUN npm install nodemon -g
+RUN npm install nodemon webpack -g
 ADD package.json /app/package.json
 RUN npm config set registry http://registry.npmjs.org
 RUN npm install && npm ls

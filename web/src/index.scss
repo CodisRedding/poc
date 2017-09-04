@@ -1,5 +1,10 @@
+@import './bootstrap/customizations.scss';
+
 body {
-  color: blue;
   background: url('./images/premise-logo.png') right no-repeat;
   background-size: contain;
+}
+
+div {
+  color: $brand-success;
 }

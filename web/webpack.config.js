@@ -1,8 +1,10 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PurifyCSSPlugin = require('purifycss-webpack');
+const bootstrapEntryPoints = require('./webpack.bootstrap.config.js');
+const glob = require('glob');
 const path = require('path');
 const webpack = require('webpack');
-const bootstrapEntryPoints = require('./webpack.bootstrap.config.js');
 
 const isProd = process.env.NODE_ENV === 'production';
 const cssDev = ['style-loader', 'css-loader', 'sass-loader'];
@@ -11,7 +13,6 @@ const cssProd = ExtractTextPlugin.extract({
   use: ['css-loader', 'sass-loader'],
   publicPath: 'dist/'
 });
-
 const cssConfig = isProd ? cssProd : cssDev;
 const bootstratConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoints.dev;
 
@@ -67,6 +68,9 @@ module.exports = {
       filename: '/css/[name].css',
       disable: !isProd,
       allChunks: true
+    }),
+    new PurifyCSSPlugin({
+      paths: glob.sync(path.join(__dirname, 'src/*.html')),
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()]
